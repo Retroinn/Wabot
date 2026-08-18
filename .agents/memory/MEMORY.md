@@ -1,0 +1,1 @@
+- [Baileys paket güvenliği](baileys-package-security.md) — eski Baileys sürümleri paket güvenlik filtresinde engellenebilir; düzeltilmiş sürüm kullanılmalı.
