@@ -1,1 +1,2 @@
 - [Baileys paket güvenliği](baileys-package-security.md) — eski Baileys sürümleri paket güvenlik filtresinde engellenebilir; düzeltilmiş sürüm kullanılmalı.
+- [Express 5 wildcard](express-5-wildcard.md) — Express 5’te `app.get("*")` yerine genel fallback middleware kullanılmalı.

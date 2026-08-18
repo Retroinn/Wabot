@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#111827" />
+    <title>WhatsApp Grup Botu</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">BAİLEYS YÖNETİM PANELİ</p>
+          <h1>WhatsApp Grup Botu</h1>
+          <p class="subtitle">Bağlantıyı, hedef grubu ve günlük mesajları tek yerden yönet.</p>
+        </div>
+        <div class="live-badge"><span class="pulse"></span> Canlı panel</div>
+      </header>
+
+      <div id="notice" class="notice" role="status" aria-live="polite"></div>
+
+      <section class="grid grid-top">
+        <article class="card status-card">
+          <div class="card-heading">
+            <div>
+              <p class="section-kicker">BOT DURUMU</p>
+              <h2 id="connection-title">Kontrol ediliyor...</h2>
+            </div>
+            <span id="connection-dot" class="status-dot status-dot-muted"></span>
+          </div>
+          <div class="status-row">
+            <span id="connection-label">Bağlantı kontrol ediliyor</span>
+            <span id="bot-state" class="tag">Bot aktif</span>
+          </div>
+          <div class="account">
+            <span class="icon-box">WA</span>
+            <div>
+              <span class="muted">Bağlı WhatsApp hesabı</span>
+              <strong id="account-name">Henüz bağlı değil</strong>
+              <small id="account-id">—</small>
+            </div>
+          </div>
+          <div class="button-row">
+            <button id="toggle-bot" class="button button-primary" type="button">Botu Pasif Et</button>
+            <button id="refresh-groups" class="button button-secondary" type="button">Grupları Yenile</button>
+          </div>
+        </article>
+
+        <article id="qr-card" class="card qr-card">
+          <div class="card-heading">
+            <div>
+              <p class="section-kicker">WHATSAPP QR</p>
+              <h2>Telefonla bağlan</h2>
+            </div>
+            <span class="qr-label">Güvenli giriş</span>
+          </div>
+          <div id="qr-content" class="qr-content">
+            <div class="spinner"></div>
+            <p>QR kod bekleniyor...</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="grid grid-main">
+        <article class="card">
+          <div class="card-heading">
+            <div>
+              <p class="section-kicker">HEDEF GRUP</p>
+              <h2 id="target-name">Grup seçilmedi</h2>
+            </div>
+            <span id="target-state" class="tag tag-warning">Seçilmedi</span>
+          </div>
+          <div class="target-details">
+            <span class="muted">Grup ID</span>
+            <code id="target-id">BURAYA_GRUP_ID</code>
+          </div>
+          <p class="helper">Otomatik ve panelden gönderilen mesajlar yalnızca seçtiğin gruba gider.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-heading">
+            <div>
+              <p class="section-kicker">ZAMANLAMA</p>
+              <h2>Günlük mesaj saatleri</h2>
+            </div>
+            <span class="tag">Europe/Istanbul</span>
+          </div>
+          <form id="schedule-form" class="schedule-form">
+            <label>
+              <span>Günaydın</span>
+              <input id="morning-time" name="morning" type="time" value="08:30" required />
+            </label>
+            <label>
+              <span>Akşam</span>
+              <input id="evening-time" name="evening" type="time" value="19:00" required />
+            </label>
+            <label>
+              <span>İyi geceler</span>
+              <input id="night-time" name="night" type="time" value="23:30" required />
+            </label>
+            <button class="button button-primary" type="submit">Saatleri Kaydet</button>
+          </form>
+        </article>
+      </section>
+
+      <section class="grid grid-main">
+        <article class="card">
+          <div class="card-heading">
+            <div>
+              <p class="section-kicker">MESAJ GÖNDER</p>
+              <h2>Hızlı kontroller</h2>
+            </div>
+            <span class="muted">Hedef gruba gönderilir</span>
+          </div>
+          <div class="action-grid">
+            <button class="button button-action" data-message-category="test" type="button">
+              <span class="action-symbol">↗</span>
+              <span><strong>Test mesajı</strong><small>Bağlantıyı dene</small></span>
+            </button>
+            <button class="button button-action" data-message-category="morning" type="button">
+              <span class="action-symbol">☀</span>
+              <span><strong>Günaydın mesajı</strong><small>Rastgele mesaj seç</small></span>
+            </button>
+            <button class="button button-action" data-message-category="night" type="button">
+              <span class="action-symbol">☾</span>
+              <span><strong>İyi geceler mesajı</strong><small>Rastgele mesaj seç</small></span>
+            </button>
+          </div>
+        </article>
+
+        <article class="card groups-card">
+          <div class="card-heading">
+            <div>
+              <p class="section-kicker">GRUPLAR</p>
+              <h2>Erişilebilen gruplar</h2>
+            </div>
+            <span id="group-count" class="tag">0 grup</span>
+          </div>
+          <div id="groups-list" class="groups-list">
+            <div class="empty-state">WhatsApp bağlandıktan sonra gruplar burada görünecek.</div>
+          </div>
+        </article>
+      </section>
+
+      <section class="grid grid-bottom">
+        <article class="card">
+          <div class="card-heading">
+            <div>
+              <p class="section-kicker">WORDLIST</p>
+              <h2>Mesaj kategorileri</h2>
+            </div>
+            <span class="muted">messages.json</span>
+          </div>
+          <div id="message-counts" class="count-list"></div>
+        </article>
+
+        <article class="card">
+          <div class="card-heading">
+            <div>
+              <p class="section-kicker">GEÇMİŞ</p>
+              <h2>Son gönderilen mesajlar</h2>
+            </div>
+            <span class="muted">En son 10</span>
+          </div>
+          <div id="recent-messages" class="recent-list">
+            <div class="empty-state">Henüz gönderilmiş mesaj yok.</div>
+          </div>
+        </article>
+      </section>
+
+      <footer>Panel otomatik olarak yenilenir · Bot ayarları JSON dosyalarında saklanır</footer>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>
